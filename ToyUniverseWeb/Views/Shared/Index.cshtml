@@ -1,0 +1,61 @@
+﻿@using ToyUniverseData.Models;
+@using ToyUniverseWeb.Models;
+
+@model PagedResult<Toy>;
+
+<h3>Toys</h3>
+<hr />
+<form asp-action="Index" asp-controller="Toy" method="post">
+    <table class="table table-striped table-primary">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Options</th>
+        </tr>
+        @foreach (var toy in Model.Results)
+        {
+            <tr>
+                <td scope="row">@toy.CToyId</td>
+                <td>@toy.VToyName</td>
+                <td>@toy.VToyDescription</td>
+                <td>@toy.MToyRate</td>
+                <td>@toy.SiToyQoh</td>
+                <td align="center">
+                <a href="@Url.Action("Add", "Cart", new { id = toy.CToyId })">Buy Now</a>
+            </td>
+            </tr>
+        }
+    </table>
+    <br />
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @for (int pageIndex = 1; pageIndex <= Model.PageCount; pageIndex++)
+            {
+
+                @if (pageIndex != Model.CurrentPage)
+                {
+
+                    <li class="page-item"><a class="page-link" href="javascript:pagerClick(@pageIndex);">@pageIndex</a></li>
+                }
+                else
+                {
+                    <li class="page-item active">
+                        <a class="page-link" href="#">@pageIndex <span class="sr-only">(current)</span></a>
+                    </li>
+                }
+
+            }
+        </ul>
+    </nav>
+    <input type="hidden" id="currentPageIndex" name="currentPageIndex" />
+</form>
+<script type="text/javascript">
+    function pagerClick(index) {
+        document.getElementById("currentPageIndex").value = index;
+        document.forms[0].submit();
+    }
+</script>
