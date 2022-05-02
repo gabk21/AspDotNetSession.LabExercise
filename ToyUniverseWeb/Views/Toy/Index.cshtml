@@ -8,22 +8,22 @@
 <form asp-action="Index" asp-controller="Toy" method="post">
     <table>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Options</th>
+            <th style="text-align:center">ID</th>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Description</th>
+            <th style="text-align:center">Price</th>
+            <th style="text-align:center">Quantity</th>
+            <th style="text-align:center">Options</th>
         </tr>
         @foreach (var toy in Model.Results)
         {
             <tr>
-                <td scope="row">@toy.CToyId</td>
-                <td>@toy.VToyName</td>
-                <td>@toy.VToyDescription</td>
-                <td>@toy.MToyRate.ToString("C2")</td>
-                <td>@toy.SiToyQoh</td>
-                <td align="center">
+                <td style="text-align:center" scope="row">@toy.CToyId</td>
+                <td style="text-align:center">@toy.VToyName</td>
+                <td style="text-align:center">@toy.VToyDescription</td>
+                <td style="text-align:center">@toy.MToyRate.ToString("C2")</td>
+                <td style="text-align:center">@toy.SiToyQoh</td>
+                <td style="text-align:center">
                 @*@Html.ActionLink("Details", "Details", new { id=toy.CToyId,  }) |*@
                 <a href="@Url.Action("Add", "Cart", new { id = toy.CToyId })">Buy</a>
             </td>
@@ -32,7 +32,7 @@
     </table>
     <br />
 
-    <nav aria-label="Page navigation example">
+    <nav>
         <ul class="pagination">
             @for (int pageIndex = 1; pageIndex <= Model.PageCount; pageIndex++)
             {

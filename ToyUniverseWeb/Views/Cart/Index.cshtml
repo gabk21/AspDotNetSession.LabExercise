@@ -1,4 +1,5 @@
-﻿@using ToyUniverseData.Models
+﻿@using ToyUniverseData.Models;
+@using ToyUniverseWeb.Models;
 @using ToyUniverseWeb.Extensions
 @using Microsoft.AspNetCore.Http
 
@@ -14,38 +15,33 @@
 {
     <table>
         <tr>
-            <th class="header">Id</th>
-            <th class="header">Name</th>
-            <th class="header">Description</th>
-            <th class="header">Price</th>
-            <th class="header">Quantity</th>
-            <th class="header">Sub Total</th>
+            <th style="text-align:center">Id</th>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Description</th>
+            <th style="text-align:center">Price</th>
+            <th style="text-align:center">Quantity</th>
+            <th style="text-align:center" width= "80px">Sub Total</th>
         </tr>
         @foreach (ShoppingCart item in @Context.Session.GetObject<List<ShoppingCart>>("cart"))
         {
             <tr>
-               
-                <td>@item.CToy.CToyId</td>
-                <td>@item.CToy.VToyName</td>
-                <td>@item.CToy.VToyDescription</td>
-                <td>@item.CToy.MToyRate</td>
-                <td>@item.SiQty</td>
-                <td>@(@item.CToy.MToyRate * @item.SiQty)</td>
-                 <td><a href="@Url.Action("Remove", "Cart", new { id = item.CToy.CToyId })">Remove</a></td>
+                <td style="text-align:center">@item.CToy.CToyId</td>
+                <td style="text-align:center">@item.CToy.VToyName</td>
+                <td style="text-align:center">@item.CToy.VToyDescription</td>
+                <td style="text-align:center">@item.CToy.MToyRate.ToString("C2")</td>
+                <td style="text-align:center">@item.SiQty</td>
+                <td style="text-align:center">@(item.CToy.MToyRate * item.SiQty)</td>
+                <td style="text-align:center"><a href="@Url.Action("Remove", "Cart", new { id = item.CToy.CToyId })">Remove</a></td>
             </tr>
         }
         <tr>
-            <td colspan="6">Grand Total</td>
-            <td>
-                @total
-        </td>
-    </tr>
-</table>
+            <td colspan="6" style="text-align:right">Grand Total: @total</td>
+        </tr>
+    </table>
 
-<br>
-<a href="@Url.Action("Index", "Toy")">Shop Again</a>
-<br />
-
+    <br>
+    <a href="@Url.Action("Index", "Toy")">Shop Again</a>
+    <br />
 }
 else
 {

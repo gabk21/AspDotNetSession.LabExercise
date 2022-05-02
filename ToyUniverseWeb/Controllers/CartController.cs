@@ -68,6 +68,7 @@ namespace ToyUniverseWeb.Controllers
             return RedirectToAction("Index");
         }
 
+
         private int isExist(string id)
         {
             List<ShoppingCart> cart = HttpContext.Session.GetObject<List<ShoppingCart>>("cart");
